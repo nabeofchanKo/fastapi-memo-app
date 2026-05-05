@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 
 class MemoCreate(BaseModel):
@@ -10,3 +10,5 @@ class MemoResponse(BaseModel):
     title: str
     content: str
     created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
