@@ -14,7 +14,9 @@ def get_db():
 
 # Initialzie
 app = FastAPI()
-Memo.metadata.create_all(bind=engine)
+@app.on_event("startup")
+def startup():
+    Memo.metadata.create_all(bind=engine)
 
 @app.post("/memos")
 def create_memo(memo: MemoCreate, db: Session=Depends(get_db)) -> MemoResponse:
